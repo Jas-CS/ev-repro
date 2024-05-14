@@ -1,23 +1,29 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EvervaultInput } from "@evervault/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Input() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState<any>(null);
 
-  const change = (inputData: { encryptedCard: { number: string } }) => {
-    setData(inputData.encryptedCard.number);
+  const change = (inputData: any) => {
+    setData(inputData);
   };
+
+  const encrpytedPan = data?.encryptedCard?.number ?? "";
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <div>
-        <EvervaultInput
-          config={{
-            disableCVV: "true",
-            disableExpiry: "true",
-          }}
-          // @ts-expect-error unknown type
-          onChange={change}
-        />
-        {data}
+      <EvervaultInput
+        config={{
+          disableCVV: "true",
+          disableExpiry: "true",
+        }}
+        onChange={change}
+      />
+      {encrpytedPan}
     </div>
   );
 }
