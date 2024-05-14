@@ -1,6 +1,5 @@
-import { EvervaultInput, EvervaultProvider } from "@evervault/react";
+import { EvervaultInput } from "@evervault/react";
 import { useState } from "react";
-import config from "./config";
 
 function Input() {
   const [data, setData] = useState("");
@@ -10,7 +9,6 @@ function Input() {
   };
   return (
     <div>
-      <EvervaultProvider teamId={config.TEAM_ID} appId={config.APP_ID}>
         <EvervaultInput
           config={{
             disableCVV: "true",
@@ -20,7 +18,6 @@ function Input() {
           onChange={change}
         />
         {data}
-      </EvervaultProvider>
     </div>
   );
 }
